@@ -60,6 +60,10 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
+    aaptOptions {
+        noCompress "tflite"
+    }
 }
 
 flutter {
@@ -70,5 +74,9 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'org.tensorflow:tensorflow-lite:2.3.0'
     implementation 'org.tensorflow:tensorflow-lite-gpu:2.3.0'
+    implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly-SNAPSHOT'
+    // The GPU delegate library is optional. Depend on it as needed.
+    implementation 'org.tensorflow:tensorflow-lite-gpu:0.0.0-nightly-SNAPSHOT'
+    implementation 'org.tensorflow:tensorflow-lite-support:0.0.0-nightly-SNAPSHOT'
 
 }

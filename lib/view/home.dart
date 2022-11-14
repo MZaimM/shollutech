@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shollutech_v5/tflite/recognition.dart';
 import 'package:shollutech_v5/tflite/stats.dart';
@@ -14,7 +13,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   late List<Recognition> results;
 
   Stats? stats;
@@ -30,10 +28,6 @@ class _HomeState extends State<Home> {
         children: <Widget>[
           // Camera View
           CameraView(resultsCallback, statsCallback),
-
-          // Bounding boxes
-          boundingBoxes(results),
-          // Bottom Sheet
 
           Align(
             alignment: Alignment.bottomCenter,
@@ -77,7 +71,12 @@ class _HomeState extends State<Home> {
                 ),
               ),
             ),
-          )
+          ),
+
+          // Bounding boxes
+          // boundingBoxes(results),
+
+          // Bottom Sheet
         ],
       ),
     );
@@ -87,14 +86,15 @@ class _HomeState extends State<Home> {
   Widget boundingBoxes(List<Recognition> results) {
     if (results == null) {
       return Container();
+    } else {
+      return Stack(
+        children: results
+            .map((e) => BoxWidget(
+                  result: e,
+                ))
+            .toList(),
+      );
     }
-    return Stack(
-      children: results
-          .map((e) => BoxWidget(
-                result: e,
-              ))
-          .toList(),
-    );
   }
 
   /// Callback to get inference results from [CameraView]
