@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:shollutech_v5/view/scan_page.dart';
 import '../tflite/recognition.dart';
 
 class BoxWidget extends StatelessWidget {
-  final Recognition result;
-  const BoxWidget({super.key, required this.result});
+  Recognition? result;
+  BoxWidget({super.key,  this.result});
 
   @override
   Widget build(BuildContext context) {
     // Color for bounding box
     Color color = Colors.primaries[
-        (result.label.length + result.label.codeUnitAt(0) + result.id) %
+        (result!.label.length + result!.label.codeUnitAt(0) + result!.id) %
             Colors.primaries.length];
-
     return Positioned(
-      left: result.renderLocation.left,
-      top: result.renderLocation.top,
-      width: result.renderLocation.width,
-      height: result.renderLocation.height,
+      left: result!.renderLocation.left,
+      top: result!.renderLocation.top,
+      width: result!.renderLocation.width,
+      height: result!.renderLocation.height,
       child: Container(
-        width: result.renderLocation.width,
-        height: result.renderLocation.height,
+        width: result!.renderLocation.width,
+        height: result!.renderLocation.height,
         decoration: BoxDecoration(
             border: Border.all(color: color, width: 3),
             borderRadius: const BorderRadius.all(Radius.circular(2))),
@@ -31,8 +31,9 @@ class BoxWidget extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  Text(result.label),
-                  Text(" ${result.score.toStringAsFixed(2)}"),
+                  Text(result!.label),
+
+                  Text(" ${result!.score.toStringAsFixed(2)}"),
                 ],
               ),
             ),

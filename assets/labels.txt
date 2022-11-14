@@ -1,9 +1,2 @@
-???
-Takbiratul benar
-Takbiratul salah
-Bersedekap benar
-Bersedekap salah
-Rukuk benar
-Rukuk Salah
-Sujud Benar
-Sujud Salah
+0 Takbiratul benar
+1 Takbiratul salah

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:shollutech_v5/view/home.dart';
+import 'package:shollutech_v5/view/scan_page.dart';
 import 'package:shollutech_v5/view/quran_page.dart';
 import 'package:shollutech_v5/view/sholat_page.dart';
 
@@ -57,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           currentTab == 0 ? Icon(Icons.home, color: HexColor("#40B07A"),) : Icon(Icons.home_outlined, color: Colors.grey,),
-                          Text("Surat", style: TextStyle(
+                          Text("Home", style: TextStyle(
                             color: currentTab == 0 ? HexColor("#40B07A") : Colors.grey
                           ),)
                         ],

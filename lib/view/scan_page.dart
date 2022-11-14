@@ -7,22 +7,24 @@ import '../main.dart';
 import 'camera_view.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  Home({super.key});
 
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  
-
   Stats? stats;
-
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(29, 255, 255, 255),
+        toolbarOpacity: 0.5,
+      ),
       key: scaffoldKey,
       backgroundColor: Colors.black,
       body: Stack(
@@ -32,6 +34,13 @@ class _HomeState extends State<Home> {
 
           // Bounding boxes
           boundingBoxes(results ?? []),
+
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+            height: 200,
+            width: MediaQuery.of(context).size.width,
+            child: Row(children: [],),
+          ),
 
           Align(
             alignment: Alignment.bottomCenter,
@@ -57,6 +66,7 @@ class _HomeState extends State<Home> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Column(
                                   children: [
+                                    
                                     StatsRow('Inference time:',
                                         '${stats!.inferenceTime} ms'),
                                     StatsRow('Total prediction time:',
@@ -76,8 +86,6 @@ class _HomeState extends State<Home> {
               ),
             ),
           ),
-
-          
 
           // Bottom Sheet
         ],

@@ -17,4 +17,18 @@ class ApiService{
     }
     return users;
   } 
+
+  static Future<List<SuratModel>> getAyatData(String? nomor) async{
+    
+    var response = await http.get(Uri.parse(
+      "https://api.banghasan.com/quran/format/json/surat/"+nomor!+"/ayat/1-10"));
+    List<dynamic> jsonData = jsonDecode(utf8.decode(response.bodyBytes))['ayat']['data']['ar'];
+
+    List<SuratModel> users = [];
+
+    for (var i = 0; i < jsonData.length; i++) {
+      users.add(SuratModel.fromJson(jsonData[i]));
+    }
+    return users;
+  }
 }

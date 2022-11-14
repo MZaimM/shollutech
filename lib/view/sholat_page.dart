@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:shollutech_v5/view/detail_artikel.dart';
 
 import '../models/data.dart';
 import '../services/data_services.dart';
@@ -89,8 +90,9 @@ class _SholatPageState extends State<SholatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
         body: Container(
-      margin: EdgeInsets.only(top: 40, left: 24, right: 24),
+      margin: EdgeInsets.only(top: 56, left: 16, right: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
@@ -122,12 +124,26 @@ class _SholatPageState extends State<SholatPage> {
                       itemBuilder: (context, index) {
                         return Column(
                           children: [
-                            card_blog(
-                                snapshot.data![index].nama,
-                                snapshot.data![index].gambar,
-                                snapshot.data![index].detail,
-                                snapshot,
-                                index),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => DetailArtikel(
+                                              nama: snapshot.data![index].nama,
+                                              gambar:
+                                                  snapshot.data![index].gambar,
+                                              detail:
+                                                  snapshot.data![index].detail,
+                                            )));
+                              },
+                              child: card_blog(
+                                  snapshot.data![index].nama,
+                                  snapshot.data![index].gambar,
+                                  snapshot.data![index].detail,
+                                  snapshot,
+                                  index),
+                            ),
                           ],
                         );
                       },

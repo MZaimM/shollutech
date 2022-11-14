@@ -1,8 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shollutech_v5/view/home.dart';
-import 'package:shollutech_v5/view/main_page.dart';
+import 'package:shollutech_v5/view/scan_page.dart';
 import 'package:shollutech_v5/view/splash%20_screen.dart';
 
 
