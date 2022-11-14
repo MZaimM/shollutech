@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:shollutech_v5/view/home.dart';
 import 'package:shollutech_v5/view/splash%20_screen.dart';
 
+import 'package:shollutech_v5/view/main_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const SplashScreen(),
+      home: const MainPage(),
     );
   }
 }

@@ -1,6 +1,6 @@
 # shollutech_v5
 
-A new Flutter project.
+A new Flutter project, this project using object detection with ML library https://pub.dev/packages/tflite_flutter 
 
 ## Getting Started
 
