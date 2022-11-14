@@ -3,6 +3,7 @@ import 'package:shollutech_v5/tflite/recognition.dart';
 import 'package:shollutech_v5/tflite/stats.dart';
 import 'package:shollutech_v5/view/box_widget.dart';
 import 'package:shollutech_v5/view/camera_view_singleton.dart';
+import '../main.dart';
 import 'camera_view.dart';
 
 class Home extends StatefulWidget {
@@ -13,7 +14,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  late List<Recognition> results;
+  
 
   Stats? stats;
 
@@ -28,6 +29,9 @@ class _HomeState extends State<Home> {
         children: <Widget>[
           // Camera View
           CameraView(resultsCallback, statsCallback),
+
+          // Bounding boxes
+          boundingBoxes(results ?? []),
 
           Align(
             alignment: Alignment.bottomCenter,
@@ -73,8 +77,7 @@ class _HomeState extends State<Home> {
             ),
           ),
 
-          // Bounding boxes
-          // boundingBoxes(results),
+          
 
           // Bottom Sheet
         ],
@@ -98,9 +101,9 @@ class _HomeState extends State<Home> {
   }
 
   /// Callback to get inference results from [CameraView]
-  void resultsCallback(List<Recognition> results) {
+  void resultsCallback(List<Recognition> result) {
     setState(() {
-      this.results = results;
+      results = result;
     });
   }
 

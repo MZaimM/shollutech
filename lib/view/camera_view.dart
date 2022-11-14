@@ -3,6 +3,7 @@ import 'dart:isolate';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:shollutech_v5/main.dart';
 import 'package:shollutech_v5/tflite/classifier.dart';
 import 'package:shollutech_v5/tflite/recognition.dart';
 import 'package:shollutech_v5/tflite/stats.dart';
@@ -21,8 +22,7 @@ class CameraView extends StatefulWidget {
 
 class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
 
-    /// List of available cameras
-  List<CameraDescription>? cameras;
+
 
   /// Controller
   CameraController? cameraController;
@@ -60,7 +60,6 @@ class _CameraViewState extends State<CameraView> with WidgetsBindingObserver {
   }
 
   void initializeCamera() async {
-    cameras = await availableCameras();
 
     // cameras[0] for rear-camera
     cameraController =

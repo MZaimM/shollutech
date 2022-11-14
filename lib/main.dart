@@ -2,13 +2,21 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shollutech_v5/view/home.dart';
+import 'package:shollutech_v5/view/main_page.dart';
 import 'package:shollutech_v5/view/splash%20_screen.dart';
 
-import 'package:shollutech_v5/view/main_page.dart';
+
+import 'tflite/recognition.dart';
+
+    /// List of available cameras
+List<CameraDescription>? cameras;
+List<Recognition>? results;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    cameras = await availableCameras();
+  
   runApp(const MyApp());
 }
 
@@ -34,8 +42,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const MainPage(),
-    );
+      home: const SplashScreen());
   }
 }
 

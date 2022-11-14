@@ -3,6 +3,9 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:hexcolor/hexcolor.dart';
 
+import '../models/data.dart';
+import '../services/data_services.dart';
+
 class SholatPage extends StatefulWidget {
   const SholatPage({super.key});
 
@@ -47,7 +50,8 @@ class _SholatPageState extends State<SholatPage> {
     );
   }
 
-  Widget card_blog(){
+  Widget card_blog(String nama, String gambar, String detail,
+      AsyncSnapshot<List<Data>> snapshot, int index) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Container(
@@ -55,16 +59,33 @@ class _SholatPageState extends State<SholatPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Image.asset("assets/Image.png", height: 186,),
-            SizedBox(height: 12,),
-            Text("Tata Cara Sholat", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
-            SizedBox(height: 12,),
-            Text("Turn down the world's noise with the long-lasting noise cancellation performance of the WH-CH710N wireless headphones",maxLines: 2,style: TextStyle(fontSize: 14, color: Colors.grey[600]),)
+            Image.network(
+              snapshot.data![index].gambar,
+              height: 280,
+              width: double.infinity,
+              fit: BoxFit.cover,
+            ),
+            SizedBox(
+              height: 12,
+            ),
+            Text(
+              "Tata Cara Sholat",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(
+              height: 12,
+            ),
+            Text(
+              "Turn down the world's noise with the long-lasting noise cancellation performance of the WH-CH710N wireless headphones",
+              maxLines: 2,
+              style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+            )
           ],
         ),
       ),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,10 +102,41 @@ class _SholatPageState extends State<SholatPage> {
             "Popular Feature",
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 16,),
-          card_blog(),
-          
-
+          SizedBox(
+            height: 16,
+          ),
+          Expanded(
+            child: FutureBuilder<List<Data>>(
+              future: DataServices.getData(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else {
+                  if (snapshot.hasError) {
+                    return const Text('Woops something wrong');
+                  } else {
+                    return ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: snapshot.data?.length,
+                      itemBuilder: (context, index) {
+                        return Column(
+                          children: [
+                            card_blog(
+                                snapshot.data![index].nama,
+                                snapshot.data![index].gambar,
+                                snapshot.data![index].detail,
+                                snapshot,
+                                index),
+                          ],
+                        );
+                      },
+                    );
+                  }
+                }
+              },
+            ),
+          ),
         ],
       ),
     ));
